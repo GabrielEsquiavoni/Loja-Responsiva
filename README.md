@@ -3,7 +3,7 @@
 ![Demo App](/frontend/public/screenshot-for-readme.png)
 
 Projeto desenvolvido para treinamento
-Feito com base em um curso de MERN [Channel](https://www.youtube.com/@asaprogrammer_)
+Feito com base em um curso de MERN -> [Canal do Tutor](https://www.youtube.com/@asaprogrammer_)
 
 
 
