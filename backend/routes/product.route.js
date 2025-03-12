@@ -1,10 +1,8 @@
-import express from 'express';
+import express from "express";
 
-import { createProduct, getProducts, updateProduct, deleteProduct } from '../controllers/product.controller.js';
+import { createProduct, deleteProduct, getProducts, updateProduct } from "../controllers/product.controller.js";
 
 const router = express.Router();
-
-router.use(express.json()); // Permite JSON no req.body
 
 router.get("/", getProducts);
 router.post("/", createProduct);

@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import {connectDB} from "./config/db.js";
+import path from "path";
+import { connectDB } from "./config/db.js"; // Verifique se a conexão com o banco é bem-sucedida
 
 import productRoutes from "./routes/product.route.js";
 
@@ -9,11 +10,30 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json()); // Permite aceitar JSON data no req.body
+const __dirname = path.resolve();
 
-app.use("/api/products",productRoutes)
+app.use(express.json()); // allows us to accept JSON data in the req.body
 
-app.listen(PORT, () => {
-    connectDB(); // Conecta ao banco antes de iniciar o servidor
-    console.log("Servidor rodando em http://localhost:" + PORT);
-});
+app.use("/api/products", productRoutes);
+
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+	});
+}
+
+const startServer = async () => {
+	try {
+		// Aguarde a conexão com o MongoDB antes de iniciar o servidor
+		await connectDB();
+		app.listen(PORT, () => {
+			console.log("Server started at http://localhost:" + PORT);
+		});
+	} catch (error) {
+		console.error("Failed to connect to MongoDB", error.message);
+		process.exit(1);
+	}
+};
+
+startServer();
