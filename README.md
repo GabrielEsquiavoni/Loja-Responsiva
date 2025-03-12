@@ -8,7 +8,7 @@ Feito com base em um curso de MERN -> [Canal do Tutor](https://www.youtube.com/@
 
 
 
-Desenvolvido Javascript.  
+Desenvolvido utilizando Javascript.  
 Utilizando _Visual Studio Code_
 
 
